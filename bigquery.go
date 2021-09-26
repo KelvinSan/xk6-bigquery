@@ -27,6 +27,6 @@ func (r *BQ) XClient(ctxPtr *context.Context, serviceAccount string) interface{}
 
 func (r *BQ) Query(name string) string {
 
-	return name
+	return name + "hello"
 
 }
