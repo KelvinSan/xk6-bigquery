@@ -102,15 +102,21 @@ for {
     
 }
 
-sets := QueryResponse{Data: data}
+for i := 0; i < len(data); i++{
 
-bytes, err := json.Marshal(sets)
+print(data[i])
 
-	if err != nil {
-		panic("Error Occured receiving datasets "+err.Error())
-	}
+}
 
-	return string(bytes)
+// sets := QueryResponse{Data: data}
 
-	
+// bytes, err := json.Marshal(sets)
+
+// 	if err != nil {
+// 		panic("Error Occured receiving datasets "+err.Error())
+// 	}
+
+// 	return string(bytes)
+
+return("Hello")	
 }
