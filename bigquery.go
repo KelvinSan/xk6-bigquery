@@ -1,9 +1,13 @@
 package xk6_bigquery
 
 import (
+	"context"
+	"fmt"
 
-	"github.com/dailyburn/bigquery/client"
+	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
+	"google.golang.org/api/iterator"
+	"google.golang.org/api/option"
 )
 
 func init() {
@@ -15,26 +19,34 @@ func init() {
 type BQ struct {
 }
 
-func (c *BQ) NewClient(serviceAccount string) *client.Client{
+func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 
- if serviceAccount == ""{
+	client,err := bigquery.NewClient(context.Background(),"moonlit-poetry-327116",option.WithCredentialsFile("../demo.json"))
 
-	panic("Please enter service account json path before continue")
+	if err != nil{
 
- }
+		println("Connection Error",err.Error())
 
- return client.New(serviceAccount)
+	}
+
+	it := client.Datasets(context.Background())
+
+	for {
+		dataset, err := it.Next()
+		if err == iterator.Done {
+			break
+		}
+		fmt.Println(dataset.DatasetID)
+	}
+
+	println("Client Logged In")
+
+	return client
 
 }
 
-func (r *BQ) Query(bqclient *client.Client, dataset string, project string, query string) ([][]interface{}, []string, error) {
+func (r *BQ) Query(bqclient *bigquery.Client, query string) string {
 
-	rows,headers,err := bqclient.Query(dataset,project,query)
-
-	if err != nil {
-		panic("Something happened "+err.Error())
-	}
-
-	return rows,headers,err
+	return query
 
 }
