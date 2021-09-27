@@ -4,7 +4,7 @@ const client = xk6_bigquery.newClient("demo.json")
 
 export default function(){
 
-    console.log(xk6_bigquery.query(client,"Hello"))
+    console.log(xk6_bigquery.getDatasets(client,"Hello"))
 
 
 }
