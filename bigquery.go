@@ -1,9 +1,7 @@
 package xk6_bigquery
 
 import (
-	"context"
-	"github.com/dailyburn/bigquery/client"
-	"go.k6.io/k6/js/common"
+	
 	"go.k6.io/k6/js/modules"
 )
 
