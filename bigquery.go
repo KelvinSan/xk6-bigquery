@@ -16,16 +16,7 @@ func init() {
 type BQ struct {
 }
 
-type Client struct {
-	bqclient *client.Client
-}
-
-func (r *BQ) XClient(ctxPtr *context.Context, serviceAccount string) interface{} {
-	rt := common.GetRuntime(*ctxPtr)
-	return common.Bind(rt, &Client{bqclient: client.New(serviceAccount)}, ctxPtr)
-}
-
-func (r *Client) Query(dataset string, project string, query string) (string,string,string) {
+func (r *BQ) Query(dataset string, project string, query string) (string,string,string) {
 
 	return dataset, project, query
 
