@@ -2,10 +2,7 @@ module github.com/KelvinSan/xk6-bigquery
 
 go 1.17
 
-require (
-	github.com/dailyburn/bigquery v0.0.0-20171116202005-b6f18972580e
-	go.k6.io/k6 v0.34.1
-)
+require go.k6.io/k6 v0.34.1
 
 require (
 	cloud.google.com/go v0.94.1 // indirect

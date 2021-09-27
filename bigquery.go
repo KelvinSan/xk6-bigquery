@@ -20,7 +20,7 @@ type BQ struct {
 
 type Datasets struct {
 
-sets []string `json:data`
+Data []string
 
 
 }
@@ -55,7 +55,7 @@ func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) string {
 		datasets = append(datasets, dataset.DatasetID)
 	}
 
-	sets := Datasets{sets: datasets}
+	sets := Datasets{Data: datasets}
 
 	bytes, err := json.Marshal(sets)
 
