@@ -2,6 +2,8 @@ package xk6_bigquery
 
 import (
 	"context"
+	"log"
+
 	"github.com/dailyburn/bigquery/client"
 	"go.k6.io/k6/js/common"
 	"go.k6.io/k6/js/modules"
@@ -25,8 +27,15 @@ func (r *BQ) XClient(ctxPtr *context.Context, serviceAccount string) interface{}
 	return common.Bind(rt, &Client{bqclient: client.New(serviceAccount)}, ctxPtr)
 }
 
-func (r *BQ) Query(name string) string {
+func (r *Client) Query(dataset string, project string, query string) ([][]interface{}, []string, error) {
 
-	return name + "hello"
+	row,header,err := r.bqclient.Query(dataset,project,query)
+
+	if err != nil{
+
+		log.Fatal("An error has occured", err.Error())
+
+	}
+	return row,header,err
 
 }
