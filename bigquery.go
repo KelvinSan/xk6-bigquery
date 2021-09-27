@@ -25,8 +25,8 @@ func (r *BQ) XClient(ctxPtr *context.Context, serviceAccount string) interface{}
 	return common.Bind(rt, &Client{bqclient: client.New(serviceAccount)}, ctxPtr)
 }
 
-func (r *BQ) Query(name string) string {
+func (r *BQ) Query(dataset string) string {
 
-	return name + "hello"
+	return dataset + "hello"
 
 }
