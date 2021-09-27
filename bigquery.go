@@ -29,7 +29,13 @@ func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 
 	}
 
-	it := client.Datasets(context.Background())
+	return client
+
+}
+
+func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) string {
+
+	it := bqclient.Datasets(context.Background())
 
 	for {
 		dataset, err := it.Next()
@@ -38,15 +44,6 @@ func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 		}
 		fmt.Println(dataset.DatasetID)
 	}
-
-	println("Client Logged In")
-
-	return client
-
-}
-
-func (r *BQ) Query(bqclient *bigquery.Client, query string) string {
-
-	return query
+	return "Logged In"
 
 }
