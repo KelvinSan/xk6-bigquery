@@ -21,7 +21,7 @@ type BQ struct {
 
 func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 
-	client,err := bigquery.NewClient(context.Background(),"moonlit-poetry-327116",option.WithCredentialsFile("../demo.json"))
+	client,err := bigquery.NewClient(context.Background(),"moonlit-poetry-327116",option.WithCredentialsFile(serviceAccount))
 
 	if err != nil{
 
