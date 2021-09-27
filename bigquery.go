@@ -88,10 +88,11 @@ if err != nil {
 	panic("Error occured fetching query "+ err.Error())
 }
 
-data := []bigquery.Value{}
+
+var values []bigquery.Value
 
 for {
-    var values []bigquery.Value
+    
     err := it.Next(&values)
     if err == iterator.Done {
         break
@@ -99,13 +100,10 @@ for {
     if err != nil {
 		panic("Error occured fetching query "+ err.Error())
     }
-
-	data = append(data, values)
     
 }
 
-fmt.Println(data)
-
+fmt.Println(values)
 // sets := QueryResponse{Data: data}
 
 // bytes, err := json.Marshal(sets)
