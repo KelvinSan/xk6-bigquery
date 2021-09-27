@@ -3,8 +3,6 @@ package xk6_bigquery
 import (
 	"context"
 	"encoding/json"
-	"fmt"
-
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
 	"google.golang.org/api/iterator"
@@ -23,6 +21,13 @@ type BQ struct {
 type Datasets struct {
 
 Data []string `json:"data"`
+
+
+}
+
+type QueryResponse struct{
+
+Data []bigquery.Value `json:"data"`
 
 
 }
@@ -71,7 +76,7 @@ func (r *BQ) GetDatasets(bqclient *bigquery.Client) string {
 
 
 
-func(r *BQ) Query(bqclient *bigquery.Client, query string){
+func(r *BQ) Query(bqclient *bigquery.Client, query string) string{
 
 q := bqclient.Query(query)
 
@@ -80,6 +85,9 @@ it, err := q.Read(context.Background())
 if err != nil {
 	panic("Error occured fetching query "+ err.Error())
 }
+
+data := []bigquery.Value{}
+
 for {
     var values []bigquery.Value
     err := it.Next(&values)
@@ -89,8 +97,20 @@ for {
     if err != nil {
 		panic("Error occured fetching query "+ err.Error())
     }
-    fmt.Print("These are the values ", values)
+
+	data = append(data, values)
+    
 }
+
+sets := QueryResponse{Data: data}
+
+bytes, err := json.Marshal(sets)
+
+	if err != nil {
+		panic("Error Occured receiving datasets "+err.Error())
+	}
+
+	return string(bytes)
 
 	
 }
