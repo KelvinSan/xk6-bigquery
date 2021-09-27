@@ -27,15 +27,17 @@ func (r *BQ) XClient(ctxPtr *context.Context, serviceAccount string) interface{}
 	return common.Bind(rt, &Client{bqclient: client.New(serviceAccount)}, ctxPtr)
 }
 
-func (r *Client) Query(dataset string, project string, query string) ([][]interface{}, []string, error) {
+func (r *Client) Query(dataset string, project string, query string) string {
 
-	row,header,err := r.bqclient.Query(dataset,project,query)
+	// row,header,err := r.bqclient.Query(dataset,project,query)
 
-	if err != nil{
+	// if err != nil{
 
-		log.Fatal("An error has occured", err.Error())
+	// 	log.Fatal("An error has occured", err.Error())
 
-	}
-	return row,header,err
+	// }
+	// return row,header,err
+
+	return dataset
 
 }
