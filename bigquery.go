@@ -103,7 +103,7 @@ for {
     
 }
 
-fmt.Println(values)
+fmt.Println(values[0])
 // sets := QueryResponse{Data: data}
 
 // bytes, err := json.Marshal(sets)
