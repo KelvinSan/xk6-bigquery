@@ -1,8 +1,10 @@
 package xk6_bigquery
 
 import (
-	"encoding/json"
 	"context"
+	"encoding/json"
+	"fmt"
+
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
 	"google.golang.org/api/iterator"
@@ -78,7 +80,6 @@ it, err := q.Read(context.Background())
 if err != nil {
 	panic("Error occured fetching query "+ err.Error())
 }
-
 for {
     var values []bigquery.Value
     err := it.Next(&values)
@@ -86,9 +87,9 @@ for {
         break
     }
     if err != nil {
-        panic("Error occured fetching query "+ err.Error())
+		panic("Error occured fetching query "+ err.Error())
     }
-    println(values)
+    fmt.Println("These are the values _", values)
 }
 
 	
