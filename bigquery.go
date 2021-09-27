@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
-
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
 	"google.golang.org/api/iterator"
@@ -101,7 +99,6 @@ for {
     if err != nil {
         panic("Error occured fetching query "+ err.Error())
     }
-	// time.Sleep(100 * time.Millisecond)
     fmt.Println("Query executed here are rows ",values)
 }
 

@@ -16,12 +16,14 @@ export default function(){
 
      })
 
-     group("dataload test",() => {
+     sleep(2)
 
-        testDataload(client)
+   //   group("dataload test",() => {
+
+   //      testDataload(client)
 
 
-     })
+   //   })
 
      sleep(2)
      
