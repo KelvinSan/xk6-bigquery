@@ -104,11 +104,7 @@ for {
     
 }
 
-for i := 0; i < len(data); i++{
-
-	fmt.Println(data)
-
-}
+fmt.Println(data)
 
 // sets := QueryResponse{Data: data}
 
