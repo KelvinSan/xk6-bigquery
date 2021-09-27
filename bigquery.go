@@ -78,7 +78,7 @@ func (r *BQ) GetDatasets(bqclient *bigquery.Client) string {
 
 
 
-func(r *BQ) Query(bqclient *bigquery.Client, query string) string{
+func(r *BQ) Query(bqclient *bigquery.Client, query string){
 
 q := bqclient.Query(query)
 
@@ -89,30 +89,17 @@ if err != nil {
 }
 
 
-var values []bigquery.Value
 
 for {
-    
+    var values []bigquery.Value
     err := it.Next(&values)
     if err == iterator.Done {
         break
     }
     if err != nil {
-		panic("Error occured fetching query "+ err.Error())
+        panic("Error occured fetching query "+ err.Error())
     }
-    
+    fmt.Println("Query executed here are rows ",values)
 }
 
-fmt.Println(values[0])
-// sets := QueryResponse{Data: data}
-
-// bytes, err := json.Marshal(sets)
-
-// 	if err != nil {
-// 		panic("Error Occured receiving datasets "+err.Error())
-// 	}
-
-// 	return string(bytes)
-
-return("Hello")	
 }
