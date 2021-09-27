@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-
+	"log"
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
 	"google.golang.org/api/iterator"
@@ -101,5 +101,33 @@ for {
     }
     fmt.Println("Query executed here are rows ",values)
 }
+
+}
+
+func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket string){
+	
+	myDataset := bqclient.Dataset(dataset)
+	gcsRef := bigquery.NewGCSReference("gs://my-bucket/my-object")
+	gcsRef.AllowJaggedRows = true
+	loader := myDataset.Table("dest").LoaderFrom(gcsRef)
+	loader.CreateDisposition = bigquery.CreateNever
+	job, err := loader.Run(context.Background())
+	
+	if err != nil {
+		panic("Job Loader Configuration Failed"+ err.Error())
+	}
+
+	status, err2 := job.Status(context.Background())
+
+	if err2 != nil {
+        panic("Job Loader Configuration Failed"+ err.Error())
+    }
+	
+    if status.Done() {
+        if status.Err() != nil {
+            log.Fatalf("Job failed with error %v", status.Err())
+        }
+    }
+	
 
 }
