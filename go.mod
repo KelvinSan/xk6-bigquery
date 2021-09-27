@@ -1,4 +1,4 @@
-module  github.com/KelvinSan/xk6-bigquery
+module github.com/KelvinSan/xk6-bigquery
 
 go 1.17
 
