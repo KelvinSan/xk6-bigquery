@@ -89,7 +89,7 @@ for {
     if err != nil {
 		panic("Error occured fetching query "+ err.Error())
     }
-    fmt.Println("These are the values _", values)
+    fmt.Print("These are the values ", values)
 }
 
 	
