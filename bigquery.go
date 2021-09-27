@@ -1,7 +1,6 @@
 package xk6_bigquery
 
 import (
-	"os"
 
 	"github.com/dailyburn/bigquery/client"
 	"go.k6.io/k6/js/modules"
@@ -16,9 +15,7 @@ func init() {
 type BQ struct {
 }
 
-func (c *BQ) NewClient() *client.Client{
-
-	serviceAccount := os.Getenv("GPC_SERVICE_ACCOUNT")
+func (c *BQ) NewClient(serviceAccount string) *client.Client{
 
  if serviceAccount == ""{
 
