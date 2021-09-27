@@ -114,7 +114,7 @@ func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket strin
 	job, err := loader.Run(context.Background())
 	
 	if err != nil {
-		panic("Job Loader Configuration Failed"+ err.Error())
+		panic("Job Loader Configuration Failed "+ err.Error())
 	}
 
 	status, err2 := job.Status(context.Background())
@@ -127,6 +127,7 @@ func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket strin
         if status.Err() != nil {
             log.Fatalf("Job failed with error %v", status.Err())
         }
+		fmt.Println("Job was success data has been loaded")
     }
 	
 
