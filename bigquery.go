@@ -104,12 +104,12 @@ for {
 
 }
 
-func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket string){
+func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket string,table string){
 
 	myDataset := bqclient.Dataset(dataset)
 	gcsRef := bigquery.NewGCSReference(gsbucket)
 	gcsRef.AllowJaggedRows = true
-	loader := myDataset.Table("dest").LoaderFrom(gcsRef)
+	loader := myDataset.Table(table).LoaderFrom(gcsRef)
 	loader.CreateDisposition = bigquery.CreateNever
 	job, err := loader.Run(context.Background())
 	
