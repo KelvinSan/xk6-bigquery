@@ -101,7 +101,7 @@ for {
     if err != nil {
         panic("Error occured fetching query "+ err.Error())
     }
-	time.Sleep(100 * time.Millisecond)
+	// time.Sleep(100 * time.Millisecond)
     fmt.Println("Query executed here are rows ",values)
 }
 
