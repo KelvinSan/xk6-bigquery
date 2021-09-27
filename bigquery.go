@@ -2,8 +2,6 @@ package xk6_bigquery
 
 import (
 	"context"
-	"log"
-
 	"github.com/dailyburn/bigquery/client"
 	"go.k6.io/k6/js/common"
 	"go.k6.io/k6/js/modules"
@@ -37,7 +35,7 @@ func (r *Client) Query(dataset string, project string, query string) string {
 
 	// }
 	// return row,header,err
-
+	
 	return dataset
 
 }
