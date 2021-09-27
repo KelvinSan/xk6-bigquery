@@ -1,6 +1,7 @@
 package xk6_bigquery
 
 import (
+	"encoding/json"
 	"context"
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
@@ -15,6 +16,13 @@ func init() {
 }
 
 type BQ struct {
+}
+
+type Datasets struct {
+
+sets []string `json:data`
+
+
 }
 
 
@@ -33,7 +41,7 @@ func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 
 }
 
-func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) []string {
+func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) string {
 
 	it := bqclient.Datasets(context.Background())
 
@@ -47,7 +55,14 @@ func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) []string {
 		datasets = append(datasets, dataset.DatasetID)
 	}
 
+	sets := Datasets{sets: datasets}
 
-	return datasets
+	bytes, err := json.Marshal(sets)
+
+	if err != nil {
+		panic("Error Occured receiving datasets "+err.Error())
+	}
+
+	return string(bytes)
 
 }
