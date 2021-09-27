@@ -27,8 +27,14 @@ func (c *BQ) NewClient(serviceAccount string) *client.Client{
 
 }
 
-func (r *BQ) Query(bqclient *client.Client, dataset string, project string, query string) (string,string,string) {
+func (r *BQ) Query(bqclient *client.Client, dataset string, project string, query string) ([][]interface{}, []string, error) {
 
-	return dataset, project, query
+	rows,headers,err := bqclient.Query(dataset,project,query)
+
+	if err != nil {
+		panic("Something happened "+err.Error())
+	}
+
+	return rows,headers,err
 
 }
