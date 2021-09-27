@@ -3,6 +3,8 @@ package xk6_bigquery
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+
 	"cloud.google.com/go/bigquery"
 	"go.k6.io/k6/js/modules"
 	"google.golang.org/api/iterator"
@@ -104,7 +106,7 @@ for {
 
 for i := 0; i < len(data); i++{
 
-print(data[i])
+	fmt.Println(data)
 
 }
 
