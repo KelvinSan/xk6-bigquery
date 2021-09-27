@@ -20,7 +20,7 @@ type BQ struct {
 
 type Datasets struct {
 
-Data []string
+Data []string `json:"data"`
 
 
 }
@@ -41,7 +41,7 @@ func (c *BQ) NewClient(serviceAccount string) *bigquery.Client {
 
 }
 
-func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) string {
+func (r *BQ) GetDatasets(bqclient *bigquery.Client) string {
 
 	it := bqclient.Datasets(context.Background())
 
@@ -65,4 +65,31 @@ func (r *BQ) GetDatasets(bqclient *bigquery.Client, query string) string {
 
 	return string(bytes)
 
+}
+
+
+
+func(r *BQ) Query(bqclient *bigquery.Client, query string){
+
+q := bqclient.Query(query)
+
+it, err := q.Read(context.Background())
+
+if err != nil {
+	panic("Error occured fetching query "+ err.Error())
+}
+
+for {
+    var values []bigquery.Value
+    err := it.Next(&values)
+    if err == iterator.Done {
+        break
+    }
+    if err != nil {
+        panic("Error occured fetching query "+ err.Error())
+    }
+    println(values)
+}
+
+	
 }
