@@ -105,9 +105,9 @@ for {
 }
 
 func(r *BQ) DataLoader(bqclient *bigquery.Client, dataset string, gsbucket string){
-	
+
 	myDataset := bqclient.Dataset(dataset)
-	gcsRef := bigquery.NewGCSReference("gs://my-bucket/my-object")
+	gcsRef := bigquery.NewGCSReference(gsbucket)
 	gcsRef.AllowJaggedRows = true
 	loader := myDataset.Table("dest").LoaderFrom(gcsRef)
 	loader.CreateDisposition = bigquery.CreateNever
